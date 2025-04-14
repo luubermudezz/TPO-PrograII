@@ -5,17 +5,22 @@ import java.util.List;
 
 public class VersionedStack implements Stack {
     private static final int MAX_SIZE = 10000;
-    private final int[] array;
+    private final int[] array; // version actual
     private int count;
-    private final List<Stack> versions; // Historial de versiones
-
+    private final int[][] versions; // historial de versiones
+    private final int[] versionSizes;
+    private int currentVersion;
+    private int versionCount; // cantidad total de versiones
 
     public VersionedStack() {
-        array = new int[MAX_SIZE];
-        count = 0;
-        versions = new ArrayList<>();
-    }
+        this.array = new int[MAX_SIZE];
+        this.count = 0;
+        this.versions = new int[MAX_SIZE][MAX_SIZE];
+        this.versionSizes = new int[MAX_SIZE];
+        this.currentVersion = -1; // no hay una version actual
+        this.versionCount = 0;
 
+    }
 
     @Override
     public void add(int a) {
@@ -55,32 +60,40 @@ public class VersionedStack implements Stack {
 
     // Guarda una versión de la pila
     private void saveVersion() {
-        Stack version = StackUtil.copy(array);
-        return;
-
-
-
-
+        if (versionCount >= MAX_SIZE) {
+            throw new RuntimeException("No se pueden crear mas versiones");
+        }
+        for (int i = 0; i < count; i++) {
+            versions[versionCount][i] = array[i];
+        }
+        versionSizes[versionCount] = count;
+        currentVersion = versionCount;
+        versionCount++;
     }
-
 
     // Devuelve una versión específica de la pila
-    public VersionedStack getVersion(int version) {
-        if (version < 0 || version >= versions.size()) {
-            throw new IllegalArgumentException("Version not found");
+    public void goToVersion(int version) {
+        if (version < 0 || version >= MAX_SIZE) {
+            throw new IllegalArgumentException("No existe esa version");
         }
-        VersionedStack versionedStack = new VersionedStack();
-        versionedStack.array = versions.get(version);
-        versionedStack.count = versions.get(version).length;
-        return versionedStack;
+
+        count = versionSizes[version];
+
+        for (int i = 0; i < count; i++) {
+            array[i] = versions[version][i];
+        }
+
+        currentVersion = version;
     }
 
-
-    // Elimina una versión específica
-    public void removeVersion(int version) {
-        if (version < 0 || version >= versions.size()) {
-            throw new IllegalArgumentException("Version not found");
+    // crea una nueva version a partir de otra existente
+    public void createVersionFrom(int version) {
+        if (version < 0 || version >= MAX_SIZE) {
+            throw new IllegalArgumentException("No existe esa version");
         }
-        versions.remove(version);
+
+        goToVersion(version);
+
+        saveVersion();
     }
 }

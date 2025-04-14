@@ -6,13 +6,10 @@
  * en pilas, como copiar, imprimir, ordenar y calcular el tamaño.
  */
 public class StackUtil {
-
-
     /**
      * Constructor privado para evitar la instanciación de la clase de utilidad.
      */
     private StackUtil() {
-
 
     }
     /**
