@@ -6,10 +6,13 @@ import java.util.List;
 public class VersionedStack implements Stack {
     private static final int MAX_SIZE = 10000;
     private final int[] array; // version actual
-    private int count;
+    private int count; // cantidad de elementos de la version actual
+
     private final int[][] versions; // historial de versiones
     private final int[] versionSizes;
-    private int currentVersion;
+    
+    private int indexCurrentVersion;
+    
     private int versionCount; // cantidad total de versiones
 
     public VersionedStack() {
@@ -17,9 +20,8 @@ public class VersionedStack implements Stack {
         this.count = 0;
         this.versions = new int[MAX_SIZE][MAX_SIZE];
         this.versionSizes = new int[MAX_SIZE];
-        this.currentVersion = -1; // no hay una version actual
+        this.indexCurrentVersion = -1; // no hay una version actual
         this.versionCount = 0;
-
     }
 
     @Override
@@ -63,11 +65,12 @@ public class VersionedStack implements Stack {
         if (versionCount >= MAX_SIZE) {
             throw new RuntimeException("No se pueden crear mas versiones");
         }
+
         for (int i = 0; i < count; i++) {
             versions[versionCount][i] = array[i];
         }
         versionSizes[versionCount] = count;
-        currentVersion = versionCount;
+        indexCurrentVersion = versionCount;
         versionCount++;
     }
 
@@ -83,7 +86,7 @@ public class VersionedStack implements Stack {
             array[i] = versions[version][i];
         }
 
-        currentVersion = version;
+        indexCurrentVersion = version;
     }
 
     // crea una nueva version a partir de otra existente
@@ -93,7 +96,6 @@ public class VersionedStack implements Stack {
         }
 
         goToVersion(version);
-
         saveVersion();
     }
 }
