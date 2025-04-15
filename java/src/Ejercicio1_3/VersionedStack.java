@@ -1,3 +1,4 @@
+package Ejercicio1_3;
 
 public class VersionedStack implements Stack {
     private static final int MAX_SIZE = 10000;
@@ -23,7 +24,7 @@ public class VersionedStack implements Stack {
     @Override
     public void add(int a) {
         if(count == MAX_SIZE) {
-            throw new RuntimeException("Stack is full");
+            throw new RuntimeException("Ejercicio1_3.Stack is full");
         }
         array[count] = a;
         count++;

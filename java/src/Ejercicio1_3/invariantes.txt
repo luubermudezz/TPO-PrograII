@@ -1,0 +1,46 @@
+----- Invariantes de VersionedStack:
+
+
+1. El tamaño del arreglo 'array' debe ser al menos igual a 'count'.
+  - Invariante: array.length >= count
+
+
+2. El número de versiones debe coincidir con la longitud del arreglo 'versions'.
+  - Invariante: versions.length == versionCount
+  - Cada versión almacenada en 'versions[i]' debe ser un arreglo con
+los elementos de la pila en esa versión.
+  EJEMPLO: versions = [
+      [1],       // Versión 0: Pila con 1 elemento
+      [1, 2],    // Versión 1: Pila con 2 elementos
+      [1, 2, 3], // Versión 2: Pila con 3 elementos
+      [1, 2]     // Versión 3: Pila con 2 elementos (después de eliminar)
+  ]
+
+
+3. El número de elementos en 'versionSizes' debe coincidir con el número de versiones.
+  - Invariante: versionSizes.length == versionCount
+  - versionSizes[i] debe contener el número de elementos en la pila en la versión 'i'.
+
+
+4. La versión actual ('currentVersion') debe ser un índice válido dentro de 'versions'.
+  - Invariante: 0 <= currentVersion < versionCount
+  - La pila debe coincidir con el estado guardado en 'versions[currentVersion]'.
+
+
+5. El acceso al tope de la pila a través de 'getTop()' debe estar protegido:
+  - Si la pila está vacía, se debe lanzar una excepción.
+
+
+6. Las operaciones 'add()' y 'remove()' deben modificar correctamente el estado de la pila y crear una nueva versión.
+  - Después de cada operación, la versión actual debe ser actualizada y guardada correctamente.
+
+
+7. Al restaurar una versión con 'goToVersion(version)', la pila debe coincidir exactamente con el estado que tenía en esa versión.
+  - El acceso al tope de la pila debe reflejar el estado de la versión restaurada.
+
+
+
+
+------- Invariantes COORD:
+1. La coordenada siempre debe tener exactamente tres componentes: x, y, z.
+2. Las componentes deben ser valores numéricos (double), pueden ser positivas, negativas o cero.

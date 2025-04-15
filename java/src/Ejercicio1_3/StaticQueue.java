@@ -1,3 +1,5 @@
+package Ejercicio1_3;
+
 public class StaticQueue implements Queue {
     private VersionedStack inStack;  // encolar elementos
     private VersionedStack outStack; // desencolar elementos

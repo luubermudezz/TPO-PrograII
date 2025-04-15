@@ -1,3 +1,4 @@
+package Ejercicio4;
 
 public class StaticStack implements Stack {
 
