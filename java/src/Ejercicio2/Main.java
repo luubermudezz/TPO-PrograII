@@ -25,8 +25,6 @@ public class Main {
         System.out.println("Top at version 0: " + stack.getTop());  // Debería imprimir 1
 
 
-
-
         // Ir a la versión 1 (agregamos valor 2)
         stack.goToVersion(1);
         System.out.println("Top at version 1: " + stack.getTop());  // Debería imprimir 2
@@ -41,12 +39,11 @@ public class Main {
         stack.goToVersion(3);
         System.out.println("Top at version 3: " + stack.getTop());  // Debería imprimir 2
 
-
         // Verificar la versión actual
         System.out.println("Current version: " + stack.getCurrentVersion());  // Debería imprimir 3 (última versión)
 
-        // Obtenemos la versión 2 --> [1, 2]
-        System.out.println("Versión número 3: " + Arrays.toString(stack.getVersionStack(3)));
+        // Obtenemos la versión 3 --> [1, 2]
+        System.out.println("Version Number 3: " + Arrays.toString(stack.getVersionStack(3)));
     }
 }
 
