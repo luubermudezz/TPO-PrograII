@@ -5,7 +5,6 @@ public class StackUtil {
     private StackUtil() {
 
     }
-
     public static Stack copy(Stack stack) {
         Stack result = new StaticStack();
         Stack aux = new StaticStack();
@@ -88,5 +87,6 @@ public class StackUtil {
         move(stack);
         stack.add(top);
     }
+
 
 }
