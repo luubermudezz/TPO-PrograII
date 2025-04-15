@@ -1,8 +1,4 @@
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class VersionedStack implements Stack {
     private static final int MAX_SIZE = 10000;
     private final int[] array; // version actual
@@ -44,6 +40,12 @@ public class VersionedStack implements Stack {
         saveVersion();
     }
 
+    public int getFirst() {
+        if (this.isEmpty()) {
+            throw new RuntimeException("No se puede obtener el primer elemento porque la pila esta vacía.");
+        }
+        return this.array[0];
+    }
 
     @Override
     public int getTop() {
@@ -76,7 +78,7 @@ public class VersionedStack implements Stack {
 
     // Devuelve una versión específica de la pila
     public void goToVersion(int version) {
-        if (version < 0 || version >= MAX_SIZE) {
+        if (version < 0 || version >= versionCount) {
             throw new IllegalArgumentException("No existe esa version");
         }
 
@@ -91,7 +93,7 @@ public class VersionedStack implements Stack {
 
     // crea una nueva version a partir de otra existente
     public void createVersionFrom(int version) {
-        if (version < 0 || version >= MAX_SIZE) {
+        if (version < 0 || version >= versionCount) {
             throw new IllegalArgumentException("No existe esa version");
         }
 
