@@ -122,4 +122,12 @@ public class VersionedStack implements Stack {
     public int getCurrentVersion() {
         return currentVersion;
     }
+
+    // Devuelve la pila de una versión específica
+    public int[] getVersionStack(int version) {
+        if (version < 0 || version >= versionCount) {
+            throw new IllegalArgumentException("Versión inválida.");
+        }
+        return versions[version]; // Devuelve la pila de la versión solicitada
+    }
 }

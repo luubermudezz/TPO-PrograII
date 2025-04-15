@@ -1,15 +1,15 @@
 package Ejercicio2;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         VersionedStack stack = new VersionedStack();
-
 
         // Agregar elementos
         stack.add(1);
         stack.add(2);
         stack.add(3);
-
 
         // Verificar el estado de la pila
         System.out.println("Top: " + stack.getTop());  // Debería imprimir 3
@@ -44,6 +44,9 @@ public class Main {
 
         // Verificar la versión actual
         System.out.println("Current version: " + stack.getCurrentVersion());  // Debería imprimir 3 (última versión)
+
+        // Obtenemos la versión 2 --> [1, 2]
+        System.out.println("Versión número 3: " + Arrays.toString(stack.getVersionStack(3)));
     }
 }
 
